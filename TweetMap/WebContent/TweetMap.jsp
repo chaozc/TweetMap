@@ -46,7 +46,8 @@
     	Class.forName("com.mysql.jdbc.Driver"); 
     	String usr = "";
     	String pwd = "";
-        java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://mydbinstance.cqnhof000vot.us-east-1.rds.amazonaws.com:3306/TweetSchema",
+        String sql = "jdbc:mysql://mydbinstance.cqnhof000vot.us-east-1.rds.amazonaws.com:3306/TweetSchema";
+        java.sql.Connection con = DriverManager.getConnection(sql,
         usr,pwd); 
         java.sql.Statement st= con.createStatement(); 
         ResultSet rs=st.executeQuery("select * from "+table);
