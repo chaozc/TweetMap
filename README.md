@@ -15,7 +15,7 @@ The code to extract Tweets and store into database is in TweetStream folder.
 The code to show real time tweets on a HeatMap and trend analysis. 
 This project is uploaded to github: https://github.com/chaozc/TweetMap
 
-@Authors: Jin Fang, Zichen Chao (CS6998 Columbia University)
+@Authors: Jin Fang(jf2966), Zichen Chao(zc2321)     CS6998 Columbia University
 @version: Oct 25, 2015 
 
 
