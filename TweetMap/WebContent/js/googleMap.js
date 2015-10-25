@@ -23,6 +23,7 @@ function initMap() {
     map: map
   });
   load_db();
+  changeGradient();
 }
 
 
