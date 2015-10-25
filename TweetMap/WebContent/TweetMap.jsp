@@ -120,23 +120,24 @@
             </div>
         	
             <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 text-center">
             <div class="form-actions">
-        	<button class="btn btn-primary" onclick="show_history()">Show History</button>
-            <button class="btn btn-primary" onclick="hide_history()">Clear History</button>
-            <div class="dropdown">
-			    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Keywords
-			    <span class="caret"></span></button>
-			    <ul class="dropdown-menu">
-			      <li><a onClick="set_keyword('ball')">Ball Games</a></li>
-			      <li><a onClick="set_keyword('water')">Water Sports</a></li>
-			      <li><a onClick="set_keyword('dance')">Dance</a></li>
-			      <li><a onClick="set_keyword('run')">Running</a></li>
-			      <li class="divider"></li>
-			      <li><a onClick="set_keyword('all')">All Sports</a></li>
-			    </ul>
-			  </div>
-        </div>
+            <button class="btn btn-success" onclick="show_history()">Show History</button>
+            <button class="btn btn-danger" onclick="hide_history()">Clear History</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" id="cate">Keyword: All Sports
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a onClick="set_keyword('ball')">Ball Games</a></li>
+                  <li><a onClick="set_keyword('water')">Water Sports</a></li>
+                  <li><a onClick="set_keyword('dance')">Dance</a></li>
+                  <li><a onClick="set_keyword('run')">Running</a></li>
+                  <li class="divider"></li>
+                  <li><a onClick="set_keyword('all')">All Sports</a></li>
+                </ul>
+                
+              </div>
             
         
         
