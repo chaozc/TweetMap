@@ -1,7 +1,12 @@
-/*GoogleMap.js*/
+/*--------------------------------------------
+GoogleMap.js
+Define google heatmap
+Process the data from websocket
+Draw new points on the map
+----------------------------------------------*/
+
+//HeatMap Initialization
 var map, heatmap, geos = [], geos_his = [];
-
-
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
 	 
@@ -20,10 +25,8 @@ function initMap() {
   load_db();
 }
 
-function toggleHeatmap() {
-  heatmap.setMap(heatmap.getMap() ? null : map);
-}
 
+//Set gradients color on the Heatmap
 function changeGradient() {
   var gradient = [
     'rgba(0, 255, 255, 0)',
@@ -41,43 +44,37 @@ function changeGradient() {
     'rgba(191, 0, 31, 1)',
     'rgba(255, 0, 0, 1)'
   ]
-  //heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+  heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 }
 
-function changeRadius() {
-  heatmap.set('radius', heatmap.get('radius') ? null : 20);
-}
-
-function changeOpacity() {
-  heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-}
+//Add new coordination on the heatmap
 function addGeo(coordinate) {
 	var lat = parseFloat(coordinate[0]);
 	var lon = parseFloat(coordinate[1]);
 	geos.push(new google.maps.LatLng(lat, lon));
 	geos_his.push(new google.maps.LatLng(lat, lon));
-	//writeToScreen(coordinate[0]+","+coordinate[1]);
 	heatmap.setData(new google.maps.MVCArray(geos));
 }
+//Show history data on the heatmap
 function show_history() {
 	geos = geos_his;
 	heatmap.set('radius', 3);
 	heatmap.set('maxIntensity', 50);
 	heatmap.setData(new google.maps.MVCArray(geos));
 }
+//Hide history data, and show real-time newly generated data
 function hide_history() {
 	geos = [];
 	heatmap.set('radius', 10);
 	heatmap.set('maxIntensity', 5);
 	heatmap.setData(new google.maps.MVCArray(geos));
 }
-
+//Load data from the remote database on AWS
 function load_db() {
 	geos = []; geos_his = [];
 	for (var i = 0; i < data_db.length; i++){
 		geos.push(new google.maps.LatLng(data_db[i].lat, data_db[i].lon));
 		geos_his.push(new google.maps.LatLng(data_db[i].lat, data_db[i].lon));
 	}
-	//writeToScreen(geos.length.toString());
 	heatmap.setData(new google.maps.MVCArray(geos));
 }

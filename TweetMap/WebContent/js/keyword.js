@@ -1,4 +1,9 @@
-/*Keyword.js*/
+/*--------------------------------------------------
+  Keyword.js
+  When the user changes the keyword,
+  Send request via websocket to server
+  So that the server changes TwitterStream filter
+----------------------------------------------------*/
 
 var data_all = [];
 for (var i = 0; i < data_water.length; i++){
@@ -40,8 +45,6 @@ function set_keyword(w) {
 		data_db = [];
 		break;
 	}
-
-	//writeToScreen(w);
 	load_db();
 	doSend(w);
 }

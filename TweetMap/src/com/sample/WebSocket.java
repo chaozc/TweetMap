@@ -1,3 +1,9 @@
+/* -----------------------------
+ WebSocket.java
+ 
+ Define websocket server side process
+ Implement TwitterStream
+-------------------------------*/
 package com.sample;
 
 import java.io.IOException;
@@ -19,25 +25,26 @@ import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+//Define Websocket Server End
 @ServerEndpoint(value = "/echo")
 public class WebSocket {
 	private ConfigurationBuilder cb = new ConfigurationBuilder();
     private TwitterStream twitterStream;
+	//When websocket connected, start crawling from Twitter
 	@OnOpen  
     public void open(Session session) {  
        try {
     	   cb.setDebugEnabled(true)
-    	    .setOAuthConsumerKey("SXpEpp1jcBK8M4Ta8NpeK1ORV")
-    	    .setOAuthConsumerSecret("4YGvbnvBYAH18rTcGb34xWQ9YmIij2XElRenpxIDMQkHAqijvD")
-    	    .setOAuthAccessToken("3098163327-TOuw7MmR1u2xcDODfy1B4jPAmzAHZ1HmVoLpQfx")
-    	    .setOAuthAccessTokenSecret("M9lh8U65ZE3BkDuvlTfUBkV28OW1rkklZmlgb5rupuorq");
+    	    .setOAuthConsumerKey("")
+    	    .setOAuthConsumerSecret("")
+    	    .setOAuthAccessToken("")
+    	    .setOAuthAccessTokenSecret("");
     	   twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
     	   StatusListener listener = new StatusListener() {
 		        @Override
 		        public void onStatus(Status status) {
 		     	   try {
 		     		   if (status.getGeoLocation() != null){
-		     		System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText()+"-");
 		     		double lat = status.getGeoLocation().getLatitude();
 		     		double lon = status.getGeoLocation().getLongitude();
 		     		System.out.println(Double.toString(lat)+","+Double.toString(lon));
@@ -47,22 +54,18 @@ public class WebSocket {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		            //System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText()+"-");
 		        }
 
 		        @Override
 		        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
-		            //System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
 		        }
 
 		        @Override
 		        public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
-		            //System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
 		        }
 
 		        @Override
 		        public void onScrubGeo(long userId, long upToStatusId) {
-		            //System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
 		        }
 
 		        @Override
@@ -76,7 +79,6 @@ public class WebSocket {
 		        }
 		    };
 		    twitterStream.addListener(listener);
-		    
 		    FilterQuery filter = new FilterQuery();
 		    String[] keywordsArray = {"ball,soccer,hockey,football,volleyball,badminton,cricket,pingpang,tabletennis,golf,tennis,baseball,rugby,basketball", 
 					"running,jogging,run,walk,jog,step",
@@ -92,6 +94,7 @@ public class WebSocket {
 		e.printStackTrace();
 	}  
     }  
+    //When get message(keyword change request from client), set filter
     @OnMessage
     public void set_Keywords(Session session, String msg, boolean last) {
         if (session.isOpen()) {
@@ -137,6 +140,7 @@ public class WebSocket {
 		}
     }
     
+    //when lose connection, shut down TwitterStream
     @OnClose
     public void close(Session session){
     	

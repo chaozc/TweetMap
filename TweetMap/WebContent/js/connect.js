@@ -1,4 +1,10 @@
-/*WebSocket.js*/
+/*-------------------------------------------------------
+  connect.js
+  Connect the client to the server via websocket
+  Listen on the real-time Twitter crawled by the server
+---------------------------------------------------------*/
+
+//Define websocket wsUri
 var loc = window.location, wsUri;
 
 if (loc.protocol === "https:") {
@@ -9,10 +15,10 @@ else {
 }
 wsUri += "//" + loc.host;
 wsUri += loc.pathname + "echo";
-var output = document.getElementById("output");
+
+//Initalize websocket, and define functions related to websocket events
 function init() {
     
-    //writeToScreen(wsUri);
     websocket = new WebSocket(wsUri);
     websocket.onopen = function(evt) {
         onOpen(evt)
@@ -27,33 +33,20 @@ function init() {
 function send_message() {
 }
 function onOpen(evt) {
-    //writeToScreen("Connected to Endpoint!");
 }
+//When get coordinates returned from server, update coordiations on map
 function onMessage(evt) {
 	if (evt.data.indexOf(',') > 0){
-		//writeToScreen(evt.data);
 		var coordinate = evt.data.split(",");
 		addGeo(coordinate);	
 	}
-	
-    //writeToScreen("Message Received: " + evt.data);
 }
 function onError(evt) {
-    //writeToScreen('ERROR: ' + evt.data);
 }
 function doSend(message) {
-    //writeToScreen("Keyword Sent: " + message);
     websocket.send(message);
 }
-function writeToScreen(message) {
-    var pre = document.createElement("p");
-    pre.style.wordWrap = "break-word";
-    pre.innerHTML = message;
-     
-    output.appendChild(pre);
-}
 window.addEventListener("load", init, false);
-//window.addEventListener("load", load_db, false);
 
 
 

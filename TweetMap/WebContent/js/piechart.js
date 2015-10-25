@@ -1,3 +1,8 @@
+/*-------------------------------------------------------
+  piechart.js
+  Draw pie chart on the history data on different dates
+--------------------------------------------------------*/
+
 var svg = d3.select("#pie")
 	.append("svg").attr("class", "center-block").append("g").attr("class", "center-block");
 

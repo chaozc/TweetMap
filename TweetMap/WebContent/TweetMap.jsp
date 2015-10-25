@@ -1,3 +1,7 @@
+<!--
+    TweetMap.jsp
+    Default main page for the application
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
@@ -35,7 +39,8 @@
 
 </head>
 
-<body  id="page-top" class="index">
+<body id="page-top" class="index">
+    <!-- Get history data from remote database(AWS RDS) -->
     <%!
     public JSONArray get_data(String table) throws ClassNotFoundException, SQLException{
     	Class.forName("com.mysql.jdbc.Driver"); 
@@ -53,7 +58,6 @@
     		tmp.put("lon", rs.getFloat("longtitude"));
     		tmp.put("time", rs.getString("time"));
     		tmp.put("keyword", rs.getString("keyword"));
-    		//System.out.println("ll:"+Float.toString(rs.getFloat("latitude"))+":"+Float.toString(rs.getFloat("longtitude")));
             arr.add(tmp);
         }
         return arr;
@@ -64,7 +68,6 @@
     var data_run = <%=get_data("run")%>;
     var data_dance = <%=get_data("dance")%>;
     var data_ball = <%=get_data("TweeTable")%>;
-    //var data_db = data_water;
     </script>
     
     
@@ -137,13 +140,12 @@
         
         
             <div id="map"></div>
-            <div id="output"></div>
             </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Visual Analysis Section 1 -->
     <section class="success" id="Analysis1">
         <div class="container">
             <div class="row">
@@ -163,7 +165,7 @@
         </div>
     </section>
 
-	<!-- About Section -->
+	<!-- Visual Analysis Section 2 -->
     <section id="Analysis2">
         <div class="container">
             <div class="row">
@@ -202,6 +204,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/freelancer.js"></script>
     
+    <!-- Main functional javascripts -->
     <script type="text/javascript" src="js/connect.js"></script>
     <script type="text/javascript" src="js/googleMap.js"></script>
     <script type="text/javascript" src="js/keyword.js"></script>
@@ -218,15 +221,14 @@
     </script>
     
     
-	<!--<script src="http://d3js.org/d3.v3.js"></script>  -->
+	<!-- javascript for pie chart -->
 	<script src="js/d3.v3.js"></script>
-	<!--  <script src="http://d3js.org/d3.v3.min.js"></script> -->
 	<script src="js/d3.v3.min.js"></script>
 	<script src="js/data_analysis.js"></script>
 	<script src="js/piechart.js"></script>
 	
 	
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>  -->
+	<!-- javascript for curve chart -->
 	<script src="js/d3.min.js"></script>
 	<script src="js/d3.legend.js"></script>
 	<script src="js/curve.js"></script>

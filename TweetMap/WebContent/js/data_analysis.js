@@ -1,3 +1,10 @@
+/*--------------------------------------------------------
+  data_analysis.js
+  Process data from database
+  Store the data in the format of json
+  Prepare for some visual analysis
+ --------------------------------------------------------*/
+
 var data_tot = {'Ball Games':data_ball, 'Running': data_run, 'Dance': data_dance, 'Water Sports': data_water};
 var date_list = {'Ball Games':{}, 'Running': {}, 'Dance': {}, 'Water Sports': {}};
 var sports = ['Ball Games', 'Running', 'Dance', 'Water Sports'];
@@ -14,7 +21,6 @@ for (var j = 0; j < 24; ++j){
 	}
 }
 for (var i = 0; i < 4; ++i){
-	//writeToScreen(sports[i]);
 	for (var j = 0; j < 24; ++j){
 		if (j < 10){
 			time_list[sports[i]]['0'+j.toString()] = 0;
@@ -50,12 +56,3 @@ for (var i = 0; i < dates.length; ++i){
 	}
 }
 var date_id = 0;
-/*
-
-writeToScreen(dates.length.toString());
-for (var i= 0; i < n_dates; ++i){
-	for (var j = 0; j < 4; ++j){
-		writeToScreen(sports[j]+'-'+dates[i]+'-'+date_list[sports[j]][dates[i]]);
-	}
-}
-*/
