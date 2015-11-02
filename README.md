@@ -23,7 +23,7 @@ This project is uploaded to github: https://github.com/chaozc/TweetMap
 ===============
 Use Instruction
 ===============
-The web server and database server are currently running on AWS beanstalk instance.  Directly access the website via url:  http://tweetmap5env-yictmhdqnq.elasticbeanstalk.com/. Note using https protocol instead of http will cause a websocket SSL_PROTOCAL_ERROR in AWS Elastic Beanstalk.
+The web server and database server are currently running on AWS beanstalk instance.  Directly access the website via url:  http://tweetmap5env-1.elasticbeanstalk.com. Note using https protocol instead of http will cause a websocket SSL_PROTOCAL_ERROR in AWS Elastic Beanstalk.
 
 
 
